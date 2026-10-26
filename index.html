@@ -1,59 +1,98 @@
+
 <!DOCTYPE html>
 <html lang="ru">
-
-  <head>
+<head>
     <meta charset="UTF-8">
-    <meta name="viewport"
-      content="width=device-width,
-      initial-scale=0.1">
-    <title>Маршруты Петербурга</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Дороги Петербурга</title>
     <style>
-      *{
-        box-sizing: border-box;
-      }
-      body{
-        margin: 0;
-        font-family: Arial, sana-serif;
-        background: #f5f6f8;
-        color: #222;
-      }
-      /*шапка*/
-      header{
-        background: #ffffff;
-        padding: 20px 7%;
-        display: flex;
-        justify-content:
-          space-between;
-        align-items: center;
-        box-shadow: 0zpx 10px #ddd;
-      }
-      .logo {
-        font-size: 22px;
-        font-weigh: bold;
-      }
-      nav a{
-        text-decoration: mome;
-        color: #333;
-        margin-left: 25px;
-      }
-      nav a:hover {
-        color: #667788;
-      }
-      /*Главный экран*/
-      .welcome {
-        text-align:center;
-        padding: 70px 20px;
-        background: #e9edf1;
-      }
-      .welcome h1{
-        font-size: 42px;
-        margin-bottom: 15px;
-      }
-      .welcome p{
-        color: #666;
-        font-size:18px;
-      }
-      /*Маршруты*/
-      
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            background: #f3f5f2;
+            color: #24372f;
+        }
+        header {
+            background: #23483d;
+            color: white;
+            padding: 25px 15px;
+            text-align: center;
+        }
+        main {
+            max-width: 850px;
+            margin: auto;
+            padding: 20px;
+        }
+        .route {
+            background: white;
+            padding: 20px;
+            margin-bottom: 18px;
+            border-radius: 12px;
+        }
+        .route h2 {
+            margin-top: 0;
+        }
+        .route a {
+            display: inline-block;
+            background: #23483d;
+            color: white;
+            padding: 12px 16px;
+            border-radius: 7px;
+            text-decoration: none;
+        }
+        .route a:hover {
+            background: #376b59;
+        }
+        footer {
+            text-align: center;
+            padding: 20px;
+            color: #637168;
+        }
     </style>
-  </head>
+</head>
+
+<body>
+
+<header>
+    <h1>Дороги Петербурга</h1>
+    <p>Открывай город новыми маршрутами</p>
+</header>
+
+<main>
+    <h2>Маршруты</h2>
+
+    <section class="route">
+        <h2>1. Дворцовая площадь</h2>
+        <p>Начни прогулку с одного из самых известных мест Петербурга.</p>
+        <p>Пешком: около 30 минут на прогулку по площади и окрестностям.</p>
+        <a href="https://yandex.ru/maps/?text=Дворцовая%20площадь%20Санкт-Петербург"
+           target="_blank" rel="noopener noreferrer">
+            Открыть в Яндекс Картах
+        </a>
+    </section>
+
+    <section class="route">
+        <h2>2. Невский проспект</h2>
+        <p>Главная улица города с историческими зданиями и кафе.</p>
+        <p>Пешком: около 40 минут на прогулку по выбранному участку.</p>
+        <a href="https://yandex.ru/maps/?text=Невский%20проспект%20Санкт-Петербург"
+           target="_blank" rel="noopener noreferrer">
+            Открыть в Яндекс Картах
+        </a>
+    </section>
+
+    <section class="route">
+        <h2>3. Стрелка Васильевского острова</h2>
+        <p>Красивый вид на Неву и исторический центр.</p>
+        <p>Пешком: около 20 минут на прогулку по месту.</p>
+        <a href="https://yandex.ru/maps/?text=Стрелка%20Васильевского%20острова"
+           target="_blank" rel="noopener noreferrer">
+            Открыть в Яндекс Картах
+        </a>
+    </section>
+</main>
+<footer>
+    <p>Дороги Петербурга</p>
+</footer>
+</body>
+</html>
