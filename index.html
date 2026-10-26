@@ -132,92 +132,81 @@
         placeholder="Например, Невский проспект..."
         aria-label="Поиск маршрутов"
     >
-
     <h3>Как будем передвигаться?</h3>
-
+    
     <div class="transport">
-        <button class="active" data-mode="walk">🚶 Пешком</button>
-        <button data-mode="bike">🚲 Велосипед</button>
-        <button data-mode="car">🚗 Автомобиль</button>
+        <button class="active" data-mode="walk">Пешком</button>
+        <button data-mode="bike">Велосипед</button>
+        <button data-mode="car">Автомобиль</button>
     </div>
-
+    
     <div id="routes">
-
         <section class="route"
             data-name="дворцовая площадь эрмитаж">
             <h3>1. Дворцовая площадь</h3>
             <p>Знаменитая площадь рядом с Зимним дворцом и Эрмитажем.</p>
             <p><b>Начало:</b> Дворцовая площадь</p>
             <p><b>Конец:</b> Исаакиевский собор</p>
-
             <div class="time">
-                <span>⏱ Примерное время: </span>
+                <span>Примерное время: </span>
                 <b class="duration"
                    data-walk="25 минут"
                    data-bike="10 минут"
                    data-car="10–20 минут">25 минут</b>
             </div>
-
             <a class="map-link"
                href="https://yandex.ru/maps/?rtext=Дворцовая%20площадь%2C%20Санкт-Петербург~Исаакиевский%20собор%2C%20Санкт-Петербург&rtt=pd"
                target="_blank" rel="noopener noreferrer">
                 Открыть маршрут в Яндекс Картах
             </a>
         </section>
-
+        
         <section class="route"
             data-name="невский проспект казанский собор">
             <h3>2. Прогулка по Невскому</h3>
             <p>Главная улица Петербурга с историческими зданиями.</p>
             <p><b>Начало:</b> Аничков мост</p>
             <p><b>Конец:</b> Казанский собор</p>
-
             <div class="time">
-                <span>⏱ Примерное время: </span>
+                <span>Примерное время: </span>
                 <b class="duration"
                    data-walk="30 минут"
                    data-bike="12 минут"
                    data-car="10–20 минут">30 минут</b>
             </div>
-
+        
             <a class="map-link"
                href="https://yandex.ru/maps/?rtext=Аничков%20мост%2C%20Санкт-Петербург~Казанский%20собор%2C%20Санкт-Петербург&rtt=pd"
                target="_blank" rel="noopener noreferrer">
                 Открыть маршрут в Яндекс Картах
             </a>
         </section>
-
+        
         <section class="route"
             data-name="стрелка васильевского острова ростральные колонны">
             <h3>3. Стрелка Васильевского острова</h3>
             <p>Историческое место с красивым видом на Неву.</p>
             <p><b>Начало:</b> Дворцовый мост</p>
             <p><b>Конец:</b> Ростральные колонны</p>
-
             <div class="time">
-                <span>⏱ Примерное время: </span>
+                <span>Примерное время: </span>
                 <b class="duration"
                    data-walk="15 минут"
                    data-bike="7 минут"
                    data-car="10–20 минут">15 минут</b>
             </div>
-
             <a class="map-link"
                href="https://yandex.ru/maps/?rtext=Дворцовый%20мост%2C%20Санкт-Петербург~Ростральные%20колонны%2C%20Санкт-Петербург&rtt=pd"
                target="_blank" rel="noopener noreferrer">
                 Открыть маршрут в Яндекс Картах
             </a>
         </section>
-
     </div>
-
     <p class="empty" id="empty">Маршруты не найдены.</p>
 </main>
-
 <footer>
-    Дороги Петербурга · Учебный проект
+    Дороги Петербурга
 </footer>
-
 <script>
     const buttons = document.querySelectorAll(".transport button");
     const durations = document.querySelectorAll(".duration");
@@ -225,30 +214,26 @@
     const routes = document.querySelectorAll(".route");
     const search = document.getElementById("search");
     const empty = document.getElementById("empty");
-
     const modes = {
         walk: "pd",
         bike: " bicycle",
         car: "auto"
     };
-
+    
     let currentMode = "walk";
-
     buttons.forEach(function(button) {
         button.addEventListener("click", function() {
             currentMode = button.dataset.mode;
-
             buttons.forEach(function(item) {
                 item.classList.remove("active");
             });
-
+            
             button.classList.add("active");
-
             durations.forEach(function(duration) {
                 duration.textContent =
                     duration.dataset[currentMode];
             });
-
+            
             links.forEach(function(link) {
                 const url = new URL(link.href);
                 url.searchParams.set(
@@ -260,7 +245,7 @@
             });
         });
     });
-
+    
     search.addEventListener("input", function() {
         const query = search.value.toLowerCase().trim();
         let found = 0;
@@ -275,10 +260,9 @@
                 found++;
             }
         });
-
         empty.style.display = found === 0 ? "block" : "none";
     });
+    
 </script>
-
 </body>
 </html>
