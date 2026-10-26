@@ -1,120 +1,99 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Дороги Петербурга</title>
-
-    <style>
-        * {
-            box-sizing: border-box;
-        }
-
-        body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-            background: #f3f5f2;
-            color: #263b32;
-        }
-
-        header {
-            background: #23483d;
-            color: white;
-            text-align: center;
-            padding: 35px 15px;
-        }
-
-        header h1 {
-            margin: 0 0 10px;
-        }
-
-        main {
-            max-width: 900px;
-            margin: auto;
-            padding: 20px;
-        }
-
-        .search {
-            width: 100%;
-            padding: 14px;
-            border: 1px solid #ccd5cf;
-            border-radius: 10px;
-            font-size: 16px;
-            margin: 10px 0 20px;
-        }
-
-        .transport {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            margin: 15px 0 25px;
-        }
-
-        .transport button {
-            flex: 1;
-            min-width: 120px;
-            padding: 13px 8px;
-            border: 1px solid #23483d;
-            border-radius: 9px;
-            background: white;
-            color: #23483d;
-            cursor: pointer;
-            font-size: 15px;
-        }
-
-        .transport button.active {
-            background: #23483d;
-            color: white;
-        }
-
-        .route {
-            background: white;
-            border-radius: 14px;
-            padding: 20px;
-            margin-bottom: 18px;
-            box-shadow: 0 3px 12px #203b3010;
-        }
-
-        .route h3 {
-            margin-top: 0;
-        }
-
-        .time {
-            background: #edf3ef;
-            padding: 12px;
-            border-radius: 8px;
-            margin: 15px 0;
-        }
-
-        .map-link {
-            display: inline-block;
-            background: #23483d;
-            color: white;
-            padding: 12px 15px;
-            border-radius: 8px;
-            text-decoration: none;
-        }
-
-        .map-link:hover {
-            background: #376b59;
-        }
-
-        .empty {
-            display: none;
-            text-align: center;
-            padding: 20px;
-        }
-
-        footer {
-            text-align: center;
-            padding: 25px;
-            color: #68766e;
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Дороги Петербурга</title>
+<style>
+* { box-sizing: border-box; }
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f3f5f2;
+    color: #263b32;
+}
+header {
+    background: #23483d;
+    color: white;
+    text-align: center;
+    padding: 30px 15px;
+}
+header h1 { margin: 0 0 10px; }
+main {
+    max-width: 900px;
+    margin: auto;
+    padding: 20px;
+}
+.search {
+    width: 100%;
+    padding: 14px;
+    border: 1px solid #ccd5cf;
+    border-radius: 10px;
+    font-size: 16px;
+    margin: 10px 0 20px;
+}
+.transport {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin: 15px 0 25px;
+}
+.transport button {
+    flex: 1;
+    min-width: 100px;
+    padding: 13px 8px;
+    border: 1px solid #23483d;
+    border-radius: 9px;
+    background: white;
+    color: #23483d;
+    font-size: 15px;
+}
+.transport button.active {
+    background: #23483d;
+    color: white;
+}
+.route {
+    background: white;
+    border-radius: 14px;
+    padding: 20px;
+    margin-bottom: 18px;
+    box-shadow: 0 3px 12px #203b3010;
+}
+.route h3 { margin-top: 0; }
+.time {
+    background: #edf3ef;
+    padding: 12px;
+    border-radius: 8px;
+    margin: 15px 0;
+}
+.map-link {
+    display: inline-block;
+    max-width: 100%;
+    background: #23483d;
+    color: white;
+    padding: 12px 15px;
+    border-radius: 8px;
+    text-decoration: none;
+}
+.empty {
+    display: none;
+    text-align: center;
+    padding: 20px;
+}
+footer {
+    text-align: center;
+    padding: 25px;
+    color: #68766e;
+}
+@media (max-width: 480px) {
+    main { padding: 14px; }
+    header h1 { font-size: 27px; }
+    .route { padding: 16px; }
+    .transport button { font-size: 14px; }
+}
+</style>
 </head>
-
 <body>
-
 <header>
     <h1>Дороги Петербурга</h1>
     <p>Открывай город новыми маршрутами</p>
@@ -124,160 +103,198 @@
     <h2>Найди свой маршрут</h2>
     <p>Выбери транспорт и найди интересное место.</p>
 
-    <input
-        class="search"
-        id="search"
-        type="text"
-        placeholder="Например, Невский проспект..."
-        aria-label="Поиск маршрутов"
-    >
+    <input class="search" id="search" type="text"
+    placeholder="Например, Невский проспект..."
+    aria-label="Поиск маршрутов">
 
     <h3>Как будем передвигаться?</h3>
-
     <div class="transport">
         <button class="active" data-mode="walk">Пешком</button>
         <button data-mode="bike">Велосипед</button>
         <button data-mode="car">Автомобиль</button>
     </div>
 
-    <div id="routes">
-
-        <section class="route"
-            data-name="дворцовая площадь эрмитаж">
-            <h3>1. Дворцовая площадь</h3>
-            <p>Знаменитая площадь рядом с Зимним дворцом и Эрмитажем.</p>
-            <p><b>Начало:</b> Дворцовая площадь</p>
-            <p><b>Конец:</b> Исаакиевский собор</p>
-
-            <div class="time">
-                <span>Примерное время: </span>
-                <b class="duration"
-                   data-walk="25 минут"
-                   data-bike="10 минут"
-                   data-car="10–20 минут">25 минут</b>
-            </div>
-
-            <a class="map-link"
-               href="https://yandex.ru/maps/?rtext=Дворцовая%20площадь%2C%20Санкт-Петербург~Исаакиевский%20собор%2C%20Санкт-Петербург&rtt=pd"
-               target="_blank" rel="noopener noreferrer">
-                Открыть маршрут в Яндекс Картах
-            </a>
-        </section>
-
-        <section class="route"
-            data-name="невский проспект казанский собор">
-            <h3>2. Прогулка по Невскому</h3>
-            <p>Главная улица Петербурга с историческими зданиями.</p>
-            <p><b>Начало:</b> Аничков мост</p>
-            <p><b>Конец:</b> Казанский собор</p>
-
-            <div class="time">
-                <span>Примерное время: </span>
-                <b class="duration"
-                   data-walk="30 минут"
-                   data-bike="12 минут"
-                   data-car="10–20 минут">30 минут</b>
-            </div>
-
-            <a class="map-link"
-               href="https://yandex.ru/maps/?rtext=Аничков%20мост%2C%20Санкт-Петербург~Казанский%20собор%2C%20Санкт-Петербург&rtt=pd"
-               target="_blank" rel="noopener noreferrer">
-                Открыть маршрут в Яндекс Картах
-            </a>
-        </section>
-
-        <section class="route"
-            data-name="стрелка васильевского острова ростральные колонны">
-            <h3>3. Стрелка Васильевского острова</h3>
-            <p>Историческое место с красивым видом на Неву.</p>
-            <p><b>Начало:</b> Дворцовый мост</p>
-            <p><b>Конец:</b> Ростральные колонны</p>
-
-            <div class="time">
-                <span>Примерное время: </span>
-                <b class="duration"
-                   data-walk="15 минут"
-                   data-bike="7 минут"
-                   data-car="10–20 минут">15 минут</b>
-            </div>
-
-            <a class="map-link"
-               href="https://yandex.ru/maps/?rtext=Дворцовый%20мост%2C%20Санкт-Петербург~Ростральные%20колонны%2C%20Санкт-Петербург&rtt=pd"
-               target="_blank" rel="noopener noreferrer">
-                Открыть маршрут в Яндекс Картах
-            </a>
-        </section>
-
-    </div>
-
+    <div id="routes"></div>
     <p class="empty" id="empty">Маршруты не найдены.</p>
 </main>
 
-<footer>
-    Дороги Петербурга · Учебный проект
-</footer>
+<footer>Дороги Петербурга</footer>
 
 <script>
-    const buttons = document.querySelectorAll(".transport button");
-    const durations = document.querySelectorAll(".duration");
-    const links = document.querySelectorAll(".map-link");
-    const routes = document.querySelectorAll(".route");
-    const search = document.getElementById("search");
-    const empty = document.getElementById("empty");
+const routeData = [
+{
+    name: "Дворцовая площадь",
+    description: "Знаменитая площадь рядом с Зимним дворцом и Эрмитажем.",
+    start: "Дворцовая площадь",
+    end: "Исаакиевский собор",
+    times: ["25 минут", "10 минут", "10–20 минут"]
+},
+{
+    name: "Прогулка по Невскому",
+    description: "Главная улица Петербурга с историческими зданиями.",
+    start: "Аничков мост",
+    end: "Казанский собор",
+    times: ["30 минут", "12 минут", "10–20 минут"]
+},
+{
+    name: "Стрелка Васильевского острова",
+    description: "Историческое место с красивым видом на Неву.",
+    start: "Дворцовый мост",
+    end: "Ростральные колонны",
+    times: ["15 минут", "7 минут", "10–20 минут"]
+},
+{
+    name: "Петропавловская крепость",
+    description: "Старинная крепость и виды на Неву.",
+    start: "Троицкая площадь",
+    end: "Петропавловская крепость",
+    times: ["20 минут", "8 минут", "10–20 минут"]
+},
+{
+    name: "Летний сад",
+    description: "Зелёные аллеи и скульптуры в историческом саду.",
+    start: "Михайловский замок",
+    end: "Летний сад",
+    times: ["15 минут", "7 минут", "10–20 минут"]
+},
 
-    const modes = {
-        walk: "pd",
-        bike: " bicycle",
-        car: "auto"
-    };
+{
+    name: "Новая Голландия",
+    description: "Историческая архитектура и уютное пространство для прогулок.",
+    start: "Исаакиевский собор",
+    end: "Новая Голландия",
+    times: ["25 минут", "10 минут", "10–20 минут"]
+},
+{
+    name: "Смольный собор",
+    description: "Красивый собор и спокойные улицы Петербурга.",
+    start: "Смольный собор",
+    end: "Таврический сад",
+    times: ["25 минут", "10 минут", "10–20 минут"]
+},
+{
+    name: "Крейсер «Аврора»",
+    description: "Знаменитый корабль-музей на Петроградской набережной.",
+    start: "Петропавловская крепость",
+    end: "Крейсер «Аврора»",
+    times: ["30 минут", "12 минут", "10–20 минут"]
+},
+{
+    name: "Каналы Петербурга",
+    description: "Прогулка вдоль канала Грибоедова и исторических зданий.",
+    start: "Казанский собор",
+    end: "Спас на Крови",
+    times: ["15 минут", "7 минут", "10–20 минут"]
+},
+{
+    name: "Мариинский театр",
+    description: "Маршрут по историческому центру к знаменитому театру.",
+    start: "Исаакиевский собор",
+    end: "Мариинский театр",
+    times: ["25 минут", "10 минут", "10–20 минут"]
+}
+];
 
-    let currentMode = "walk";
+const routesElement = document.getElementById("routes");
+const search = document.getElementById("search");
+const empty = document.getElementById("empty");
+const buttons = document.querySelectorAll(".transport button");
 
-    buttons.forEach(function(button) {
-        button.addEventListener("click", function() {
-            currentMode = button.dataset.mode;
+let currentMode = 0;
+const modes = ["pd", "bike", "auto"];
 
-            buttons.forEach(function(item) {
-                item.classList.remove("active");
-            });
+function makeMapLink(start, end) {
+    const url = new URL("https://yandex.ru/maps/");
+    url.searchParams.set(
+        "rtext",
+        start + ", Санкт-Петербург~" + end + ", Санкт-Петербург"
+    );
+    url.searchParams.set("rtt", modes[currentMode]);
+    return url.toString();
+}
 
-            button.classList.add("active");
+function showRoutes() {
+    routesElement.innerHTML = "";
 
-            durations.forEach(function(duration) {
-                duration.textContent =
-                    duration.dataset[currentMode];
-            });
+    routeData.forEach(function(route, index) {
+        const card = document.createElement("section");
+        card.className = "route";
 
-            links.forEach(function(link) {
-                const url = new URL(link.href);
-                url.searchParams.set(
-                    "rtt",
-                    currentMode === "walk" ? "pd" :
-                    currentMode === "bike" ? "bike" : "auto"
-                );
-                link.href = url.toString();
-            });
-        });
+        const title = document.createElement("h3");
+        title.textContent = (index + 1) + ". " + route.name;
+        card.appendChild(title);
+
+        const description = document.createElement("p");
+        description.textContent = route.description;
+        card.appendChild(description);
+
+        const start = document.createElement("p");
+        start.innerHTML = "<b>Начало:</b> ";
+        start.appendChild(document.createTextNode(route.start));
+        card.appendChild(start);
+
+        const end = document.createElement("p");
+        end.innerHTML = "<b>Конец:</b> ";
+        end.appendChild(document.createTextNode(route.end));
+        card.appendChild(end);
+
+        const time = document.createElement("div");
+        time.className = "time";
+        time.appendChild(document.createTextNode("⏱ Примерное время: "));
+
+        const duration = document.createElement("b");
+        duration.textContent = route.times[currentMode];
+        time.appendChild(duration);
+        card.appendChild(time);
+
+        const link = document.createElement("a");
+        link.className = "map-link";
+        link.textContent = "Открыть маршрут в Яндекс Картах";
+        link.href = makeMapLink(route.start, route.end);
+        link.target = "_blank";
+        link.rel = "noopener noreferrer";
+        card.appendChild(link);
+
+        card.dataset.search = (
+            route.name + " " + route.description + " " +
+            route.start + " " + route.end
+        ).toLowerCase();
+
+        routesElement.appendChild(card);
     });
 
-    search.addEventListener("input", function() {
-        const query = search.value.toLowerCase().trim();
-        let found = 0;
+    filterRoutes();
+}
 
-        routes.forEach(function(route) {
-            const name = route.dataset.name;
-            const visible = name.includes(query);
+function filterRoutes() {
+    const query = search.value.toLowerCase().trim();
+    const cards = document.querySelectorAll(".route");
+    let found = 0;
 
-            route.style.display = visible ? "block" : "none";
+    cards.forEach(function(card) {
+        const visible = card.dataset.search.includes(query);
+        card.style.display = visible ? "block" : "none";
+        if (visible) found++;
+    });
 
-            if (visible) {
-                found++;
-            }
+    empty.style.display = found === 0 ? "block" : "none";
+}
+
+buttons.forEach(function(button, index) {
+    button.addEventListener("click", function() {
+        currentMode = index;
+
+        buttons.forEach(function(item) {
+            item.classList.remove("active");
         });
 
-        empty.style.display = found === 0 ? "block" : "none";
+        button.classList.add("active");
+        showRoutes();
     });
+});
+
+search.addEventListener("input", filterRoutes);
+showRoutes();
 </script>
-
 </body>
 </html>
